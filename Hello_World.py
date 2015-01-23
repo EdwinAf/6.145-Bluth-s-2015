@@ -1,12 +1,14 @@
-"#!/usr/bin/python"
 
 
-print "Hello World"
 
+def ballHandler():
+    if len(goalList)>0:
+        signalDisp()
+    else:
+        doorOpen()
+        
+	
 
-for i in ['','h','i','','h','u','m','a','n',]:
-    print i
-    
-ANS = input("What time is it? ") 
-
-print ANS,'!',  'Nice to see you have a nice day, GOTTA GO!'
+print "SHIT"
+for i in range(10):
+    print 'Cat'
