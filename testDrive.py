@@ -7,6 +7,21 @@ x.enable(True)
 y = mraa.Pwm(3)	    #motor A
 y.period_us(700)
 y.enable(True)
+door = mraa.Pwm(5)  #door servo
+door.period_ms(20)
+door.enable(True)
+door.pulsewidth_us(1300) #keeps door closed while carrying balls
+
+def flashIR():
+    ir = mraa.Gpio(13)
+    ir.dir(mraa.DIR_OUT)
+    a = 10
+    while a>0:
+        ir.write(1)   
+        time.sleep(1)	#Blast IR for one second		   
+        ir.write(0)    
+        time.sleep(2)   # Wait for the ball to fall in
+        a -= 1			# do this 10 times to get all 10 balls
 
 def driveForward():
     dirA = mraa.Gpio(12)
@@ -71,10 +86,6 @@ def turnRight():
     y.write(0)
 
 #code for door
-door = mraa.Pwm(5)
-door.period_ms(20)
-door.enable(True)
-
 def doorClose():
     door.pulsewidth_us(1300)
     time.sleep(5)
@@ -84,7 +95,7 @@ def doorOpen():
     time.sleep(5)
 
 while True:
-    choose= raw_input('Input something')
+    choose= raw_input('Input something: ')
     choose= str(choose)
     if choose=='a':
         turnLeft()
